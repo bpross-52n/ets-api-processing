@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Add this entry to TE_BASE/config.xml (//organization/standard) -->
+<organization>
+  <name>OGC</name>
+  <standard>
+    <name>API Processing</name>
+    <version>
+      <name>${spec-version}</name>
+      <suite>
+        <namespace-uri>http://www.opengis.net/cite/api-processing</namespace-uri>
+        <prefix>tns</prefix>
+        <local-name>ets-api-processing-${version}</local-name>
+        <title>Test suite ets-api-processing</title>
+        <description>Describe scope of testing.</description>
+      </suite>
+      <revision>
+        <name>${version}</name>
+        <status>Beta</status>
+        <sources>
+          <source>api-processing/${spec-version}/ctl</source>
+        </sources>
+        <webdir>api-processing/${spec-version}/site</webdir>
+      </revision>
+    </version>
+  </standard>
+</organization>
