@@ -12,6 +12,10 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientRequest;
 import com.sun.jersey.api.client.ClientResponse;
 
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.specification.RequestSpecification;
+import io.swagger.client.JSON;
+
 /**
  * A supporting base class that sets up a common test fixture. These
  * configuration methods are invoked before those defined in a subclass.
@@ -35,6 +39,8 @@ public class CommonFixture {
      */
     protected ClientResponse response;
     
+    protected Object obj;
+    
     /** A DOM parser. */
     protected DocumentBuilder docBuilder;
     protected static final String TNS_PREFIX = "tns";
@@ -42,6 +48,14 @@ public class CommonFixture {
     protected Document reqEntity;
     /** A Document representing the content of the response message. */
     protected Document rspEntity;
+    
+    protected RequestSpecification requestSpecificationValid;
+    
+    protected String processID;
+
+    protected JSON json;
+    
+    protected boolean testComplexInput;
 
     /**
      * Initializes the common test fixture with a client component for 
@@ -50,13 +64,23 @@ public class CommonFixture {
      * @param testContext The test context that contains all the information for
      * a test run, including suite attributes.
      */
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void initCommonFixture(ITestContext testContext) {
-        Object obj = testContext.getSuite().getAttribute(SuiteAttribute.CLIENT.getName());
-        if (null != obj) {
-            this.client = Client.class.cast(obj);
-        }
+        
+        json = new JSON();
+
+    	processID = (String) testContext.getSuite().getAttribute(SuiteAttribute.PROCESSID.getName());
+    	
         obj = testContext.getSuite().getAttribute(SuiteAttribute.TEST_SUBJECT.getName());
+        
+        testComplexInput = (boolean) testContext.getSuite().getAttribute(SuiteAttribute.TESTCOMPLEXINPUT.getName());
+    	
+        RequestSpecBuilder builder = new RequestSpecBuilder();
+
+        builder.setBaseUri(obj.toString());
+
+        requestSpecificationValid = builder.build();
+        
     }
 
     @BeforeMethod

@@ -69,7 +69,14 @@ public class SuiteFixtureListener implements ISuiteListener {
         }
         TestSuiteLogger.log(Level.FINE, String.format("Wrote test subject to file: %s (%d bytes)",
                 entityFile.getAbsolutePath(), entityFile.length()));
+        suite.setAttribute(SuiteAttribute.TEST_SUBJECT.getName(), iutRef);
         suite.setAttribute(SuiteAttribute.TEST_SUBJ_FILE.getName(), entityFile);
+        
+        String processID = params.get(TestRunArg.PROCESSID.toString());
+        suite.setAttribute(SuiteAttribute.PROCESSID.getName(), processID);
+        
+        boolean testComplexInput = Boolean.parseBoolean(params.get(TestRunArg.TESTCOMPLEXINPUT.toString()));
+        suite.setAttribute(SuiteAttribute.TESTCOMPLEXINPUT.getName(), testComplexInput);
     }
 
     /**

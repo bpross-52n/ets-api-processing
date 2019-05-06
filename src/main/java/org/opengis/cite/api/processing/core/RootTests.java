@@ -51,12 +51,6 @@ public class RootTests extends CommonFixture {
                 LevelResolver.create().withLevel("validation.schema.additionalProperties", Level.IGNORE).build())
             .build();
     private static final OpenApiValidationFilter validationFilter = new OpenApiValidationFilter(validator);
-    
-    private RequestSpecification requestSpecificationValid;
-
-    private RequestSpecification requestSpecificationInValid;
-
-    private String processID = "org.n52.javaps.test.EchoProcess";
 
     private String baseURIValid = "http://localhost:8080/javaps/rest/";
 
@@ -65,9 +59,6 @@ public class RootTests extends CommonFixture {
     private String complexOutputId;
 
     private String complexInputId;
-
-    private JSON json;
-
     private String complexInputMimeType;
 //    private String processID2 = "org.n52.javaps.test.EchoProcess3";
 //    private String processID3 = "org.n52.javaps.test.EchoProcess4";
@@ -84,18 +75,7 @@ public class RootTests extends CommonFixture {
     
     @BeforeTest
     public void setup() {
-        RequestSpecBuilder builder = new RequestSpecBuilder();
-
-        builder.setBaseUri(baseURIValid );
-
-        requestSpecificationValid = builder.build();
-        builder = new RequestSpecBuilder();
-
-        builder.setBaseUri("http://geoprocessing.demo.52north.org/wps-proxy/");
-        builder.setPort(8080);
-
-        requestSpecificationInValid = builder.build();
-        builder = new RequestSpecBuilder();
+    	
     }
 
     /**

@@ -26,60 +26,172 @@
    <ctl:test name="tns:Main">
       <ctl:assertion>The test subject satisfies all applicable constraints.</ctl:assertion>
 	  <ctl:code>
-        <xsl:variable name="form-data">
-           <ctl:form method="POST" width="800" height="600" xmlns="http://www.w3.org/1999/xhtml">
-             <h2>Test suite: ets-api-processing</h2>
-             <div style="background:#F0F8FF" bgcolor="#F0F8FF">
-               <p>The implementation under test (IUT) is checked against the following specifications:</p>
-               <ul>
-                 <li><a href="http://www.w3.org/TR/xml/">Extensible Markup Language (XML) 1.0</a>, 
-				 Fifth Edition</li>
-				 <li><a href="http://www.w3.org/TR/xmlbase/">XML Base</a>, Second Edition</li>
-               </ul>
-               <p>Two conformance levels are defined:</p>
-               <ul>
-                 <li>Core</li>
-                 <li>OpenAPI</li>
-                 <li>HTML</li>
-               </ul>
-             </div>
-             <fieldset style="background:#ccffff">
-               <legend style="font-family: sans-serif; color: #000099; 
-			                 background-color:#F0F8FF; border-style: solid; 
-                       border-width: medium; padding:4px">Implementation under test</legend>
-               <p>
-                 <label for="uri">
-                   <h4 style="margin-bottom: 0.5em">Location of IUT (absolute http: or file: URI)</h4>
-                 </label>
-                 <input id="uri" name="uri" size="128" type="text" value="http://localhost:8080/javaps/rest/" />
-               </p>
-               <p>
-                 <label for="doc">
-                   <h4 style="margin-bottom: 0.5em">Upload IUT</h4>
-                 </label>
-                 <input name="doc" id="doc" size="128" type="file" />
-               </p>
-               <p>
-                 <label for="level">Conformance class: </label>
-                 <input id="core" type="radio" name="core" value="1" checked="checked" />
-                 <label for="core"> Core | </label>
-                 <input id="openapi" type="radio" name="openapi" value="2" />
-                 <label class="form-label" for="openapi"> OpenAPI</label>
-               </p>
-             </fieldset>
-             <p>
-               <input class="form-button" type="submit" value="Start"/> | 
-               <input class="form-button" type="reset" value="Clear"/>
-             </p>
-           </ctl:form>
-        </xsl:variable>
+		<xsl:variable name="form-data">
+                <ctl:form height="640" width="800">
+                    <body>
+                        <h2>Compliance test suite for Web Processing Service (WPS) 1.0</h2>
+                        <h3>Service metadata</h3>
+                        <p>
+                            Please provide a URL from which a capabilities document can
+                            be retrieved. Modify the URL template below to specify the
+                            location of an OGC WPS implementation
+                            under test.
+                        </p>
+                        <blockquote>
+                            <table border="1" padding="4" bgcolor="#00ffff">
+                                <tr>
+                                    <td align="left">Service URL:</td>
+                                    <td align="center">
+                                        <input name="endpoint-uri" size="128" type="text" value="http://localhost:8080/javaps/rest/"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </blockquote>
+                        <h4>Test process</h4>
+                        <label>
+                        <input type="checkbox" name="test-complex-input" checked="checked" />
+                        Test complex input
+                        </label>
+                        <p>
+                            Please provide an process identifier that the execute tests should be run with.
+                        </p>
+                        <blockquote>
+                            <table border="1" padding="4" bgcolor="#00ffff">
+                                <tr>
+                                    <td align="left">Process identifier:</td>
+                                    <td align="center">
+                                        <input name="process-identifier" size="128" type="text" value="org.n52.javaps.test.EchoProcess"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </blockquote>
+                        <h5>Literal input</h5>
+                        <p>
+                            Please provide an literal input identifier that the execute tests should be run with.
+                        </p>
+                        <blockquote>
+                            <table border="1" padding="4" bgcolor="#00ffff">
+                                <tr>
+                                    <td align="left">Literal input identifier:</td>
+                                    <td align="center">
+                                        <input name="literal-input-identifier" size="128" type="text" value="literalInput"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Literal input data type: (optional)</td>
+                                    <td align="center">
+                                        <input name="literal-input-datatype" size="128" type="text" value=""/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Literal input unit of measurement: (optional)</td>
+                                    <td align="center">
+                                        <input name="literal-input-uom" size="128" type="text" value=""/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Literal input:</td>
+                                    <td align="center">
+                                        <input name="literal-input" size="128" type="text" value="literal.input"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </blockquote>
+                        <h5>Complex input</h5>
+                        <p>
+                            Please provide an complex input that the execute tests should be run with.
+                        </p>
+                        <blockquote>
+                            <table border="1" padding="4" bgcolor="#00ffff">
+                                <tr>
+                                    <td align="left">Complex input identifier:</td>
+                                    <td align="center">
+                                        <input name="complex-input-identifier" size="128" type="text" value="complexInput"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Complex input MIME type (optional):</td>
+                                    <td align="center">
+                                        <input name="complex-input-mimetype" size="128" type="text" value=""/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Complex input schema (optional):</td>
+                                    <td align="center">
+                                        <input name="complex-input-schema" size="128" type="text" value=""/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Complex input encoding (optional):</td>
+                                    <td align="center">
+                                        <input name="complex-input-encoding" size="128" type="text" value=""/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Complex input:</td>
+                                    <td align="center">
+                                        <textarea name="complex-input" style="width:100%"><test>data</test></textarea>
+                                    </td>
+                                </tr>
+                            </table>
+                        </blockquote>
+                        <h5>Literal output</h5>
+                        <p>
+                            Please provide an literal output identifier that the execute tests should be run with.
+                        </p>
+                        <blockquote>
+                            <table border="1" padding="4" bgcolor="#00ffff">
+                                <tr>
+                                    <td align="left">Literal output identifier:</td>
+                                    <td align="center">
+                                        <input name="literal-output-identifier" size="128" type="text" value="literalOutput"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </blockquote>
+                        <h5>Complex output</h5>
+                        <p>
+                            Please provide an complex output that the execute tests should be run with.
+                        </p>
+                        <blockquote>
+                            <table border="1" padding="4" bgcolor="#00ffff">
+                                <tr>
+                                    <td align="left">Complex output identifier:</td>
+                                    <td align="center">
+                                        <input name="complex-output-identifier" size="128" type="text" value="complexOutput"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Complex output MIME type (optional):</td>
+                                    <td align="center">
+                                        <input name="complex-output-mimetype" size="128" type="text" value=""/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Complex output schema (optional):</td>
+                                    <td align="center">
+                                        <input name="complex-output-schema" size="128" type="text" value=""/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left">Complex output encoding (optional):</td>
+                                    <td align="center">
+                                        <input name="complex-output-encoding" size="128" type="text" value=""/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </blockquote>
+                        <input type="submit" value="Start"/>
+                    </body>
+                </ctl:form>
+		</xsl:variable>
         <xsl:variable name="iut-file" select="$form-data//value[@key='doc']/ctl:file-entry/@full-path" />
 	      <xsl:variable name="test-run-props">
 		    <properties version="1.0">
           <entry key="iut">
             <xsl:choose>
               <xsl:when test="empty($iut-file)">
-                <xsl:value-of select="normalize-space($form-data/values/value[@key='uri'])"/>
+                <xsl:value-of select="normalize-space($form-data/values/value[@key='endpoint-uri'])"/>
               </xsl:when>
               <xsl:otherwise>
                 <xsl:copy-of select="concat('file:///', $iut-file)" />
@@ -87,6 +199,18 @@
             </xsl:choose>
           </entry>
           <entry key="ics"><xsl:value-of select="$form-data/values/value[@key='level']"/></entry>
+          <entry key="processid"><xsl:value-of select="$form-data/values/value[@key='process-identifier']"/></entry>
+          <entry key="testcomplexinput">
+             <xsl:variable name="testcomplexinput-checked" select="$form-data/values/value[@key='test-complex-input']" />          
+            <xsl:choose>
+              <xsl:when test="empty($testcomplexinput-checked)">
+                false
+              </xsl:when>
+              <xsl:otherwise>
+                true
+              </xsl:otherwise>
+            </xsl:choose>
+          </entry>
 		    </properties>
 		   </xsl:variable>
        <xsl:variable name="testRunDir">
