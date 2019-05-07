@@ -56,6 +56,16 @@ public class CommonFixture {
     protected JSON json;
     
     protected boolean testComplexInput;
+    
+    protected String complexInputId;
+    
+    protected String complexInputValue;
+    
+    protected String complexInputMimeType;
+    
+    protected String complexInputSchema;
+    
+    protected String complexInputEncoding;
 
     /**
      * Initializes the common test fixture with a client component for 
@@ -75,6 +85,16 @@ public class CommonFixture {
         
         testComplexInput = (boolean) testContext.getSuite().getAttribute(SuiteAttribute.TESTCOMPLEXINPUT.getName());
     	
+        complexInputId = (String) testContext.getSuite().getAttribute(SuiteAttribute.COMPLEXINPUTID.getName());
+        
+        complexInputValue = (String) testContext.getSuite().getAttribute(SuiteAttribute.COMPLEXINPUTVALUE.getName());
+        
+        complexInputMimeType = (String) testContext.getSuite().getAttribute(SuiteAttribute.COMPLEXINPUTMIMETYPE.getName());
+        
+        complexInputSchema = (String) testContext.getSuite().getAttribute(SuiteAttribute.COMPLEXINPUTSCHEMA.getName());
+        
+        complexInputEncoding = (String) testContext.getSuite().getAttribute(SuiteAttribute.COMPLEXINPUTENCODING.getName());
+        
         RequestSpecBuilder builder = new RequestSpecBuilder();
 
         builder.setBaseUri(obj.toString());

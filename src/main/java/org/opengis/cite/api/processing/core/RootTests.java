@@ -54,18 +54,17 @@ public class RootTests extends CommonFixture {
 
     private String baseURIValid = "http://localhost:8080/javaps/rest/";
 
-    private Object complexValue;
+//    private Object complexValue;
 
     private String complexOutputId;
-
-    private String complexInputId;
-    private String complexInputMimeType;
+    
+//    private String complexInputMimeType;
 //    private String processID2 = "org.n52.javaps.test.EchoProcess3";
 //    private String processID3 = "org.n52.javaps.test.EchoProcess4";
 
-    private String complexInputSchema;
-
-    private String complexInputEncoding;
+//    private String complexInputSchema;
+//
+//    private String complexInputEncoding;
 
     private String complexOutputMimeType;
 
@@ -121,15 +120,15 @@ public class RootTests extends CommonFixture {
     
     private String createExecuteJSON() {
         
-        complexValue = "<test>value</test>";
-        
-        complexInputId = "complexInput";
-        
-        complexInputMimeType = "application/xml";
-        
-        complexInputSchema = "";
-        
-        complexInputEncoding = "";
+//        complexValue = "<test>value</test>";
+//        
+//        complexInputId = "complexInput";
+//        
+//        complexInputMimeType = "application/xml";
+//        
+//        complexInputSchema = "";
+//        
+//        complexInputEncoding = "";
         
         complexOutputId = "complexOutput";
         
@@ -151,7 +150,7 @@ public class RootTests extends CommonFixture {
         
         ValueType value = new ValueType();
         
-        value.setInlineValue(complexValue);
+        value.setInlineValue(complexInputValue);
         
         complexData.setValue(value);
         

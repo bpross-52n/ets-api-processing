@@ -77,6 +77,21 @@ public class SuiteFixtureListener implements ISuiteListener {
         
         boolean testComplexInput = Boolean.parseBoolean(params.get(TestRunArg.TESTCOMPLEXINPUT.toString()));
         suite.setAttribute(SuiteAttribute.TESTCOMPLEXINPUT.getName(), testComplexInput);
+        
+        String complexInputId = (String) params.get(TestRunArg.COMPLEXINPUTID.toString());
+        suite.setAttribute(SuiteAttribute.COMPLEXINPUTID.getName(), complexInputId);
+        
+        String complexInputValue = (String) params.get(TestRunArg.COMPLEXINPUTVALUE.toString());
+        suite.setAttribute(SuiteAttribute.COMPLEXINPUTVALUE.getName(), complexInputValue);
+                
+        String complexInputMimeType = (String) params.get(TestRunArg.COMPLEXINPUTMIMETYPE.toString());
+        suite.setAttribute(SuiteAttribute.COMPLEXINPUTMIMETYPE.getName(), complexInputMimeType);
+        
+        String complexInputSchema = (String) params.get(TestRunArg.COMPLEXINPUTSCHEMA.toString());
+        suite.setAttribute(SuiteAttribute.COMPLEXINPUTSCHEMA.getName(), complexInputSchema);
+        
+        String complexInputEncoding = (String) params.get(TestRunArg.COMPLEXINPUTENCODING.toString());
+        suite.setAttribute(SuiteAttribute.COMPLEXINPUTENCODING.getName(), complexInputEncoding);
     }
 
     /**

@@ -112,7 +112,7 @@
                                 <tr>
                                     <td align="left">Complex input MIME type (optional):</td>
                                     <td align="center">
-                                        <input name="complex-input-mimetype" size="128" type="text" value=""/>
+                                        <input name="complex-input-mimetype" size="128" type="text" value="text/xml"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -130,7 +130,7 @@
                                 <tr>
                                     <td align="left">Complex input:</td>
                                     <td align="center">
-                                        <textarea name="complex-input" style="width:100%"><test>data</test></textarea>
+                                        <textarea name="complex-input-value" style="width:100%"><test>data</test></textarea>
                                     </td>
                                 </tr>
                             </table>
@@ -211,6 +211,11 @@
               </xsl:otherwise>
             </xsl:choose>
           </entry>
+		   <entry key="complexinputvalue"><xsl:value-of select="$form-data/values/value[@key='complex-input-value']"/></entry>
+		   <entry key="complexinputid"><xsl:value-of select="$form-data/values/value[@key='complex-input-identifier']"/></entry>
+           <entry key="complexinputmimetype"><xsl:value-of select="$form-data/values/value[@key='complex-input-mimetype']"/></entry>
+           <entry key="complexinputencoding"><xsl:value-of select="$form-data/values/value[@key='complex-input-encoding']"/></entry>
+           <entry key="complexinputschema"><xsl:value-of select="$form-data/values/value[@key='complex-input-schema']"/></entry>
 		    </properties>
 		   </xsl:variable>
        <xsl:variable name="testRunDir">

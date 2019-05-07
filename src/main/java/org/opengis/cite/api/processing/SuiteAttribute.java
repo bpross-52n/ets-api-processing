@@ -28,7 +28,12 @@ public enum SuiteAttribute {
     
     PROCESSID("processID", String.class),
 	
-	TESTCOMPLEXINPUT("testComplexInput", Boolean.class);
+	TESTCOMPLEXINPUT("testComplexInput", Boolean.class),
+	COMPLEXINPUTVALUE("complexInputValue", String.class),
+	COMPLEXINPUTMIMETYPE("vomplexInputMimeType", String.class),
+	COMPLEXINPUTENCODING("vomplexInputEncoding", String.class),
+	COMPLEXINPUTSCHEMA("complexInputSchema", String.class), 
+	COMPLEXINPUTID("complexInputId", String.class);
 	
     private final Class attrType;
     private final String attrName;
