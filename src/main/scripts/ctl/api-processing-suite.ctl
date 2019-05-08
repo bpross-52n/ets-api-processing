@@ -164,7 +164,7 @@
                                 <tr>
                                     <td align="left">Complex output MIME type (optional):</td>
                                     <td align="center">
-                                        <input name="complex-output-mimetype" size="128" type="text" value=""/>
+                                        <input name="complex-output-mimetype" size="128" type="text" value="text/xml"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -216,6 +216,10 @@
            <entry key="complexinputmimetype"><xsl:value-of select="$form-data/values/value[@key='complex-input-mimetype']"/></entry>
            <entry key="complexinputencoding"><xsl:value-of select="$form-data/values/value[@key='complex-input-encoding']"/></entry>
            <entry key="complexinputschema"><xsl:value-of select="$form-data/values/value[@key='complex-input-schema']"/></entry>
+		   <entry key="complexoutputid"><xsl:value-of select="$form-data/values/value[@key='complex-output-identifier']"/></entry>
+           <entry key="complexoutputmimetype"><xsl:value-of select="$form-data/values/value[@key='complex-output-mimetype']"/></entry>
+           <entry key="complexoutputencoding"><xsl:value-of select="$form-data/values/value[@key='complex-output-encoding']"/></entry>
+           <entry key="complexoutputschema"><xsl:value-of select="$form-data/values/value[@key='complex-output-schema']"/></entry>
 		    </properties>
 		   </xsl:variable>
        <xsl:variable name="testRunDir">

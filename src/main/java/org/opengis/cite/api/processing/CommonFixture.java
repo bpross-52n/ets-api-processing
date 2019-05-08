@@ -1,13 +1,22 @@
 package org.opengis.cite.api.processing;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import javax.xml.parsers.DocumentBuilder;
 
+import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.SkipException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.w3c.dom.Document;
 
+import com.atlassian.oai.validator.OpenApiInteractionValidator;
+import com.atlassian.oai.validator.report.LevelResolver;
+import com.atlassian.oai.validator.report.ValidationReport.Level;
+import com.atlassian.oai.validator.restassured.OpenApiValidationFilter;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientRequest;
 import com.sun.jersey.api.client.ClientResponse;
@@ -66,6 +75,35 @@ public class CommonFixture {
     protected String complexInputSchema;
     
     protected String complexInputEncoding;
+    
+    protected boolean testComplexOutput;
+
+    protected String complexOutputId;
+
+    protected String complexOutputMimeType;
+
+    protected String complexOutputSchema;
+
+    protected String complexOutputEncoding;    
+
+    protected static final String OPENAPI_SPEC_URL =
+            "https://app.swaggerhub.com/apiproxy/schema/file/apis/geoprocessing/WPS-all-in-one/1.0-draft?format=json";
+
+    protected static final OpenApiInteractionValidator validator = OpenApiInteractionValidator
+            .createFor(OPENAPI_SPEC_URL)
+            .withLevelResolver(
+                LevelResolver.create().withLevel("validation.schema.additionalProperties", Level.IGNORE).build())
+            .build();
+    protected static final OpenApiValidationFilter validationFilter = new OpenApiValidationFilter(validator);
+
+    protected String baseURIValid = "http://localhost:8080/javaps/rest/";
+    
+	private String processesPath = "processes/";
+
+	protected static final String REL = "rel";
+	protected static final String REL_NOT_STRING = "Rel not of type String";
+	protected static final String LINK_NOT_CONTAINED = "Landing Page does not contain link: '%s'.";
+	protected static final String HREF = "href";
 
     /**
      * Initializes the common test fixture with a client component for 
@@ -93,7 +131,17 @@ public class CommonFixture {
         
         complexInputSchema = (String) testContext.getSuite().getAttribute(SuiteAttribute.COMPLEXINPUTSCHEMA.getName());
         
-        complexInputEncoding = (String) testContext.getSuite().getAttribute(SuiteAttribute.COMPLEXINPUTENCODING.getName());
+        complexInputEncoding = (String) testContext.getSuite().getAttribute(SuiteAttribute.COMPLEXINPUTENCODING.getName());		
+		
+		testComplexOutput = (boolean) testContext.getSuite().getAttribute(SuiteAttribute.TESTCOMPLEXOUTPUT.getName());
+    	
+        complexOutputId = (String) testContext.getSuite().getAttribute(SuiteAttribute.COMPLEXOUTPUTID.getName());
+        
+        complexOutputMimeType = (String) testContext.getSuite().getAttribute(SuiteAttribute.COMPLEXOUTPUTMIMETYPE.getName());
+        
+        complexOutputSchema = (String) testContext.getSuite().getAttribute(SuiteAttribute.COMPLEXOUTPUTSCHEMA.getName());
+        
+        complexOutputEncoding = (String) testContext.getSuite().getAttribute(SuiteAttribute.COMPLEXOUTPUTENCODING.getName());
         
         RequestSpecBuilder builder = new RequestSpecBuilder();
 
@@ -108,5 +156,38 @@ public class CommonFixture {
         this.request = null;
         this.response = null;
     }
+    
+    protected String getProcessesPath() {
+    	return processesPath ;
+    }
+    
+    protected String getProcessDescriptionPath(String processId) {
+    	return getProcessesPath() + processId;
+    }
+    
+    protected String getJobsPath(String processId) {
+    	return getProcessesPath() + processId + "/jobs";
+    }
+    
+    protected String getJobStatusPath(String processId, String jobId) {
+    	return getJobsPath(processId) + "/" + jobId;
+    }
+
+    protected Object getLink(List<?> links, String relName) {
+
+		Object resultLink = null;
+		
+		for (Object link : links) {
+			if (link instanceof Map<?, ?>) {
+				Object relObject = ((Map<?, ?>) link).get(REL);
+				Assert.assertTrue(relObject instanceof String, REL_NOT_STRING);
+				if (relName.equals(relName)) {
+					resultLink = link;
+				}
+			}
+		}
+		Assert.assertNotNull(resultLink, String.format(LINK_NOT_CONTAINED, relName));
+		return resultLink;
+	}
 
 }

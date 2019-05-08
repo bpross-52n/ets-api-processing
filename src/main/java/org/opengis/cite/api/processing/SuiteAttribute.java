@@ -33,7 +33,12 @@ public enum SuiteAttribute {
 	COMPLEXINPUTMIMETYPE("vomplexInputMimeType", String.class),
 	COMPLEXINPUTENCODING("vomplexInputEncoding", String.class),
 	COMPLEXINPUTSCHEMA("complexInputSchema", String.class), 
-	COMPLEXINPUTID("complexInputId", String.class);
+	COMPLEXINPUTID("complexInputId", String.class),
+   	TESTCOMPLEXOUTPUT("testComplexOutput", Boolean.class),
+    COMPLEXOUTPUTMIMETYPE("vomplexOutputMimeType", String.class),
+    COMPLEXOUTPUTENCODING("vomplexOutputEncoding", String.class),
+    COMPLEXOUTPUTSCHEMA("complexOutputSchema", String.class), 
+    COMPLEXOUTPUTID("complexOutputId", String.class);
 	
     private final Class attrType;
     private final String attrName;
